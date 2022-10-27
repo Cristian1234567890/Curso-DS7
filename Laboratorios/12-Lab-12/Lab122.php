@@ -24,7 +24,7 @@ session_start();
         unset($_SESSION['var1']);
         echo "<a href='Lab123.php'>Paso 3:</a>";
     } else {
-        echo "La variable de sesion no existe, ir a <a href='lab121.php'>Paso 1:</a> para iniciar la sesion \n";
+        echo "La variable de sesion no existe, ir a <a href='Lab121.php'>Paso 1:</a> para iniciar la sesion \n";
     }
 
     ?>
