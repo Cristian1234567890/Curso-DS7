@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjuntar archivos en formularios con solo drag-and-drop de manera asíncrona</title>
+
+    <link rel="stylesheet" href="css/estilo.css">
+
+</head>
+<body>
+    <div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
+        <div id="drag_upload_file">
+            <p>Arrastra y suelta tus archivos aquí</p>
+            <p>o</p>
+            <p><input type="button" value="Selecciona archivos" onclick="file_explorer();"></p>
+            <input type="file" id="selectfile">
+        </div>
+    </div>
+    <div class="img-content"></div>
+    <script src="js/funciones_ajax.js"></script>
+</body>
+</html>
