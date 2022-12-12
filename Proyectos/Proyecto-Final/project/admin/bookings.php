@@ -74,6 +74,8 @@ if(isset($_POST['delete'])){
       <p>rooms : <span><?= $fetch_bookings['rooms']; ?></span></p>
       <p>adults : <span><?= $fetch_bookings['adults']; ?></span></p>
       <p>childs : <span><?= $fetch_bookings['childs']; ?></span></p>
+      <p>From : <span><?= $fetch_booking['from']; ?></span></p>
+      <p>To : <span><?= $fetch_booking['to']; ?></span></p>
       <form action="" method="POST">
          <input type="hidden" name="delete_id" value="<?= $fetch_bookings['booking_id']; ?>">
          <input type="submit" value="delete booking" onclick="return confirm('delete this booking?');" name="delete" class="btn">

@@ -74,6 +74,8 @@ if(isset($_POST['cancel'])){
       <p>adults : <span><?= $fetch_booking['adults']; ?></span></p>
       <p>childs : <span><?= $fetch_booking['childs']; ?></span></p>
       <p>booking id : <span><?= $fetch_booking['booking_id']; ?></span></p>
+      <p>From : <span><?= $fetch_booking['from']; ?></span></p>
+      <p>To : <span><?= $fetch_booking['to']; ?></span></p>
       <form action="" method="POST">
          <input type="hidden" name="booking_id" value="<?= $fetch_booking['booking_id']; ?>">
          <input type="submit" value="cancel booking" name="cancel" class="btn" onclick="return confirm('cancel this booking?');">
@@ -95,31 +97,6 @@ if(isset($_POST['cancel'])){
 </section>
 
 <!-- booking section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php include 'components/footer.php'; ?>
 

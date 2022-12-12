@@ -51,6 +51,10 @@ if(isset($_POST['book'])){
    $adults = filter_var($adults, FILTER_SANITIZE_STRING);
    $childs = $_POST['childs'];
    $childs = filter_var($childs, FILTER_SANITIZE_STRING);
+   $from = $_POST['from'];
+   $from = filter_var($from, FILTER_SANITIZE_STRING);
+   $to = $_POST['to'];
+   $to = filter_var($to, FILTER_SANITIZE_STRING);
 
    $total_rooms = 0;
 
@@ -62,45 +66,20 @@ if(isset($_POST['book'])){
    }
 
    if($total_rooms >= 30){
-      $warning_msg[] = 'rooms are not available';
+      $warning_msg[] = 'fly are not available';
    }else{
 
-      $verify_bookings = $conn->prepare("SELECT * FROM `bookings` WHERE user_id = ? AND name = ? AND email = ? AND number = ? AND rooms = ? AND check_in = ? AND check_out = ? AND adults = ? AND childs = ?");
-      $verify_bookings->execute([$user_id, $name, $email, $number, $rooms, $check_in, $check_out, $adults, $childs]);
+      $verify_bookings = $conn->prepare("SELECT * FROM `bookings` WHERE user_id = ? AND name = ? AND email = ? AND number = ? AND rooms = ? AND check_in = ? AND check_out = ? AND adults = ? AND childs = ? AND toPlanet = ? AND fromPlanet = ?");
+      $verify_bookings->execute([$user_id, $name, $email, $number, $rooms, $check_in, $check_out, $adults, $childs, $to ,$from]);
 
       if($verify_bookings->rowCount() > 0){
-         $warning_msg[] = 'room booked alredy!';
+         $warning_msg[] = 'fly booked alredy!';
       }else{
-         $book_room = $conn->prepare("INSERT INTO `bookings`(booking_id, user_id, name, email, number, rooms, check_in, check_out, adults, childs) VALUES(?,?,?,?,?,?,?,?,?,?)");
-         $book_room->execute([$booking_id, $user_id, $name, $email, $number, $rooms, $check_in, $check_out, $adults, $childs]);
-         $success_msg[] = 'room booked successfully!';
+         $book_room = $conn->prepare("INSERT INTO `bookings`(booking_id, user_id, name, email, number, rooms, check_in, check_out, adults, childs, toPlanet, fromPlanet ) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+         $book_room->execute([$booking_id, $user_id, $name, $email, $number, $rooms, $check_in, $check_out, $adults, $childs, $to , $from]);
+         $success_msg[] = 'fly booked successfully!';
       }
 
-   }
-
-}
-
-if(isset($_POST['send'])){
-
-   $id = create_unique_id();
-   $name = $_POST['name'];
-   $name = filter_var($name, FILTER_SANITIZE_STRING);
-   $email = $_POST['email'];
-   $email = filter_var($email, FILTER_SANITIZE_STRING);
-   $number = $_POST['number'];
-   $number = filter_var($number, FILTER_SANITIZE_STRING);
-   $message = $_POST['message'];
-   $message = filter_var($message, FILTER_SANITIZE_STRING);
-
-   $verify_message = $conn->prepare("SELECT * FROM `messages` WHERE name = ? AND email = ? AND number = ? AND message = ?");
-   $verify_message->execute([$name, $email, $number, $message]);
-
-   if($verify_message->rowCount() > 0){
-      $warning_msg[] = 'message sent already!';
-   }else{
-      $insert_message = $conn->prepare("INSERT INTO `messages`(id, name, email, number, message) VALUES(?,?,?,?,?)");
-      $insert_message->execute([$id, $name, $email, $number, $message]);
-      $success_msg[] = 'message send successfully!';
    }
 
 }
@@ -291,6 +270,27 @@ if(isset($_POST['send'])){
                <option value="6">6 childs</option>
             </select>
          </div>
+
+         <div class="box">
+            <p>From:  <span>*</span></p>
+            <select name="from" class="input" required>
+               <option value="Earth" selected>Earth</option>
+               <option value="Jupyter">Jupyter</option>
+               <option value="Kepler-296e">Kepler-296e</option>
+               <option value="Titan">Titan</option>
+            </select>
+         </div>
+
+         <div class="box">
+            <p>To:  <span>*</span></p>
+            <select name="to" class="input" required>
+               <option value="Earth" selected>Earth</option>
+               <option value="Jupyter">Jupyter</option>
+               <option value="Kepler-296e">Kepler-296e</option>
+               <option value="Titan">Titan</option>
+            </select>
+         </div>
+
       </div>
       <input type="submit" value="book now" name="book" class="btn">
    </form>
