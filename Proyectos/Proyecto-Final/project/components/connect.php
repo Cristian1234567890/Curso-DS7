@@ -1,6 +1,6 @@
 <?php
 
-   $db_name = 'mysql:host=localhost:5000;dbname=hotel_db';
+   $db_name = 'mysql:host=localhost:5000;dbname=flight_db';
    $db_user_name = 'root';
    $db_user_pass = '';
 

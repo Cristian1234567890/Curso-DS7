@@ -74,17 +74,6 @@ if(isset($_COOKIE['admin_id'])){
    </div>
 
    <div class="box">
-      <?php
-         $select_messages = $conn->prepare("SELECT * FROM `messages`");
-         $select_messages->execute();
-         $count_messages = $select_messages->rowCount();
-      ?>
-      <h3><?= $count_messages; ?></h3>
-      <p>total messages</p>
-      <a href="messages.php" class="btn">view messages</a>
-   </div>
-
-   <div class="box">
       <h3>quick select</h3>
       <p>login or register</p>
       <a href="login.php" class="btn" style="margin-right: 1rem;">login</a>
